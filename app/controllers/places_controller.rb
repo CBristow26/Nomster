@@ -3,7 +3,7 @@ class PlacesController < ApplicationController
 
 
 	def index
-		@place = Place.all
+		@places = Place.page(params[:page]).per(5).order("created_at ASC")
 	end
 
 
