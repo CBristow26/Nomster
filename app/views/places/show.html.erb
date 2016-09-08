@@ -38,7 +38,7 @@
       <button class="btn btn-primary" data-toggle="modal" data-target="#Photo_Modal">
       Upload Photo
       </button>
-
+      <% end %>
 
 
       <%= link_to 'Edit', edit_place_path(@place), class: 'btn btn-primary' %>
@@ -53,7 +53,7 @@
 <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
   Add a comment
 </button>
-
+</div>
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
@@ -74,7 +74,7 @@
           <%= f.submit "Add a Comment", class: 'btn btn-primary' %>
         </div>
       <% end %>
-          </div>
+      </div>
   
     </div>
   </div>
@@ -102,5 +102,6 @@
     </blockquote>
   </div>
 <% end %>
+
 
 </div>
