@@ -25,12 +25,24 @@
 	
 	<div id="map"></div>
 <% end %>
+<br /><br />
 
-<br /><br /><br />
+<!---LIST PHOTOS-->
+  <% @place.photos.each do |photo| %>
+    <%= image_tag photo.picture %>
+    <%= photo.caption %>
+  <% end %>
+
+
 
 <!-- Modal for Photo-->
 
   <div class="pull-right">
+      <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+  Add a comment
+</button>
+
     <% if current_user && current_user == @place.user %>
       <button class="btn btn-primary" data-toggle="modal" data-target="#Photo_Modal">
       Upload Photo
@@ -43,6 +55,24 @@
   </div>
   <div class="clear"></div>
 
+
+<div class="col-xs-10 col-xs-offset-1">
+<br />
+
+  <h1 class="pull-left">Comments</h1> 
+
+</div>
+<% @place.comments.each do |comment| %>
+  <div class="col-xs-12 col-sm-6">
+    <blockquote>
+      <% if comment.humanized_rating.present? %>
+     <b> <%= comment.humanized_rating %> </b> -
+     <% end %>
+     <%= comment.message %>
+      <small><%= comment.user.email %></small>
+    </blockquote>
+  </div>
+ <% end %>
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
@@ -51,6 +81,8 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">Add a comment</h4>
       </div>
+
+
           <div class="modal-body">
 
           <%= simple_form_for @comment, url: place_comments_path(@place) do |f| %>
@@ -68,29 +100,9 @@
     </div>
   </div>
 
-<div class="col-xs-10 col-xs-offset-1">
-<br />
-
-  <h1 class="pull-left">Comments</h1>
-
 </div>
 
-    <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-  Add a comment
-</button>
 <div class="clear"></div>
 
 
-<% @place.comments.each do |comment| %>
-  <div class="col-xs-12 col-sm-6">
-    <blockquote>
-      <% if comment.humanized_rating.present? %>
-     <b> <%= comment.humanized_rating %> </b> -
-     <% end %>
-     <%= comment.message %>
-      <small><%= comment.user.email %></small>
-    </blockquote>
-  </div>
- <% end %>
-</div>
+
